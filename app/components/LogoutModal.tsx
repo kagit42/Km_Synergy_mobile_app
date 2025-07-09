@@ -14,12 +14,10 @@ import { Dispatch } from 'react';
 export const LogoutModal = ({
   isLogoutModalVisible,
   setLogoutModalVisible,
-  profileuser,
   handleLogout,
 }: {
   isLogoutModalVisible: boolean;
   setLogoutModalVisible: Dispatch<React.SetStateAction<boolean>>;
-  profileuser: any;
   handleLogout: () => void;
 }) => {
   return (
@@ -48,17 +46,7 @@ export const LogoutModal = ({
               resizeMode="contain"
             />
             <Text style={styles.ModalText}>
-              <Text
-                style={{
-                  color: Colors.primary,
-                  fontFamily: Fonts.semiBold,
-                }}
-              >
-                {profileuser
-                  ? profileuser.charAt(0).toUpperCase() + profileuser.slice(1)
-                  : 'Hello'}
-              </Text>{' '}
-              are you sure you want to logout?
+              Are you sure you want to logout?
             </Text>
             <View style={styles.ModalBtnComp}>
               <CustomButton
@@ -115,6 +103,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     textAlign: 'center',
     alignSelf: 'center',
+    width : SizeConfig.width * 60
   },
   ModalBtnComp: {
     flexDirection: 'row',

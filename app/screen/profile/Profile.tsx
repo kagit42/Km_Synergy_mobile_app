@@ -17,6 +17,7 @@ import { RootStackParamList } from '../../navigation/RootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { LogoutModal } from '../../components/LogoutModal';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type ProfileType = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 
@@ -146,32 +147,79 @@ export const Profile = ({ navigation }: ProfileType) => {
 
   return (
     <View style={styles.mainComp}>
-      <StatusBar
-        backgroundColor={Colors.Background}
-        barStyle={'dark-content'}
-      />
-      <View style={styles.subComp}>
-        <Image
-          source={require('../../assets/image/profile/avatar.png')}
-          style={styles.avatar}
-        />
-        <View style={{ gap: SizeConfig.width * 0.5 }}>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
-            Xyz Name
+      <StatusBar backgroundColor={Colors.Background} barStyle={'dark-content'} />
+
+      <SafeAreaView
+        style={{
+          flex: 1,
+          gap: SizeConfig.height * 3,
+          paddingHorizontal: SizeConfig.width * 4,
+          paddingVertical : SizeConfig.height * 3
+        }}
+      >
+        {/* <View
+          style={{
+            paddingVertical: SizeConfig.height,
+            paddingBottom : SizeConfig.height * 3
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: Fonts.medium,
+              fontSize: SizeConfig.fontSize * 4.5,
+              color: Colors.black,
+            }}
+          >
+            Profile
           </Text>
-          <Text style={styles.mediaContact}>+91 1234567890</Text>
-          <Text style={styles.mediaContact}>abc@gmail.com</Text>
+        </View> */}
+
+        <View style={styles.subComp}>
+          <Image
+            source={require('../../assets/image/profile/avatar.png')}
+            style={styles.avatar}
+          />
+          <View style={{ gap: SizeConfig.width * 0.5 }}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
+              James Martin JM
+            </Text>
+            <Text style={styles.mediaContact}>1234567890</Text>
+          </View>
+
+          <View
+            style={{
+              width: SizeConfig.width * 50,
+              height: SizeConfig.width * 50,
+              borderRadius: (SizeConfig.width * 60) / 2,
+              position: 'absolute',
+              backgroundColor: 'rgba(179, 218, 239, 0.32)',
+              right: -SizeConfig.width * 20,
+              top: -SizeConfig.height * 10,
+              zIndex: -1,
+            }}
+          />
+          <View
+            style={{
+              width: SizeConfig.width * 80,
+              height: SizeConfig.width * 80,
+              borderRadius: (SizeConfig.width * 90) / 2,
+              position: 'absolute',
+              backgroundColor: 'rgba(179, 218, 239, 0.26)',
+              right: -SizeConfig.width * 40,
+              top: -SizeConfig.height * 19,
+              zIndex: -2,
+            }}
+          />
         </View>
-      </View>
-      <View style={{ gap: SizeConfig.width * 3, flex: 1 }}>
-        <View
-          style={{ borderBottomWidth: 0.3, borderBottomColor: Colors.border }}
-        />
 
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={{ paddingBottom: SizeConfig.height * 15 }}
+          contentContainerStyle={{
+            paddingBottom: SizeConfig.height * 15,
+          }}
         >
+          <View></View>
+
           <View style={{ gap: SizeConfig.width * 3 }}>
             <ProfileSubScreenTab
               onPress={() => {
@@ -234,7 +282,7 @@ export const Profile = ({ navigation }: ProfileType) => {
             />
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
 
       {/* Logout Modal */}
 
@@ -242,7 +290,6 @@ export const Profile = ({ navigation }: ProfileType) => {
         isLogoutModalVisible={isLogoutModalVisible}
         setLogoutModalVisible={setLogoutModalVisible}
         handleLogout={handleLogout}
-        profileuser={'Suhail'}
       />
     </View>
   );
@@ -318,31 +365,34 @@ const styles = StyleSheet.create({
   mainComp: {
     flex: 1,
     backgroundColor: Colors.Background,
-    paddingHorizontal: SizeConfig.width * 4,
     gap: SizeConfig.width * 5,
-    paddingVertical: SizeConfig.width * 4,
   },
   subComp: {
     alignItems: 'center',
-    justifyContent: 'center',
-    gap: SizeConfig.width * 2,
+    flexDirection: 'row',
+    gap: SizeConfig.width * 3,
+    backgroundColor: Colors.primary,
+    paddingHorizontal: SizeConfig.width * 4,
+    paddingVertical: SizeConfig.height * 2,
+    borderRadius: SizeConfig.width * 5,
+    overflow: 'hidden',
   },
   avatar: {
-    width: SizeConfig.width * 20,
-    height: SizeConfig.width * 20,
+    width: SizeConfig.width * 17,
+    height: SizeConfig.width * 17,
   },
   name: {
     fontFamily: Fonts.semiBold,
     fontSize: SizeConfig.fontSize * 4.3,
-    color: Colors.text_Secondary,
-    textAlign: 'center',
+    color: Colors.white,
+    textAlign: 'left',
     width: SizeConfig.width * 50,
   },
   mediaContact: {
     fontFamily: Fonts.regular,
     fontSize: SizeConfig.fontSize * 3,
-    color: Colors.text_Secondary,
-    textAlign: 'center',
+    color: Colors.white,
+    textAlign: 'left',
     width: SizeConfig.width * 50,
   },
 });
