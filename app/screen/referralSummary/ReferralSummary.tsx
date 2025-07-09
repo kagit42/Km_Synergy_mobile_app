@@ -14,6 +14,7 @@ import { SizeConfig } from '../../utils/SizeConfig';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
+import LinearGradient from 'react-native-linear-gradient';
 
 // Types for our referral data
 interface Referral {
@@ -155,36 +156,49 @@ export const ReferralSummary = ({ navigation }: ReferralTypeProp) => {
 
   // Render referral item
   const renderReferralItem = ({ item }: { item: Referral }) => (
-    <View style={styles.referralCard}>
-      <View style={styles.referralHeader}>
-        <View style={styles.referrerInfo}>
-          <View style={styles.avatarPlaceholder}>
-            <Text style={styles.avatarText}>
-              {item.referrerName.charAt(0).toUpperCase()}
-            </Text>
-          </View>
+    <LinearGradient
+      colors={
+        item.status == 'Pending'
+          ? ['#FFF3CD', '#FFE29F']
+          : item.status == 'Completed'
+          ? ['#CFFDBC', '#A1E89B']
+          : ['#FFD1D1', '#FF9999']
+      }
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.referralCard}
+    >
+      <View>
+        <View style={styles.referralHeader}>
+          <View style={styles.referrerInfo}>
+            <View style={styles.avatarPlaceholder}>
+              <Text style={styles.avatarText}>
+                {item.referrerName.charAt(0).toUpperCase()}
+              </Text>
+            </View>
 
-          <View style={styles.referrerDetails}>
-            <Text style={styles.referrerName}>{item.referrerName}</Text>
-            <Text style={styles.referrerLabel}>Referrer</Text>
+            <View>
+              <Text style={styles.referrerName}>{item.referrerName}</Text>
+              <Text style={styles.referrerLabel}>Referrer</Text>
+            </View>
+          </View>
+          {renderStatusBadge(item.status)}
+        </View>
+
+        <View style={styles.referralDetails}>
+          <View style={styles.detailRow}>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Referred Customer</Text>
+              <Text style={styles.detailValue}>{item.referredCustomer}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Date</Text>
+              <Text style={styles.detailValue}>{item.date}</Text>
+            </View>
           </View>
         </View>
-        {renderStatusBadge(item.status)}
       </View>
-
-      <View style={styles.referralDetails}>
-        <View style={styles.detailRow}>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Referred Customer</Text>
-            <Text style={styles.detailValue}>{item.referredCustomer}</Text>
-          </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Date</Text>
-            <Text style={styles.detailValue}>{item.date}</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+    </LinearGradient>
   );
 
   return (
@@ -231,7 +245,6 @@ export const ReferralSummary = ({ navigation }: ReferralTypeProp) => {
         style={styles.list}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
     </SafeAreaView>
   );
@@ -248,8 +261,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: SizeConfig.width * 4,
     paddingVertical: SizeConfig.height * 2.5,
     backgroundColor: '#fff',
-    // borderBottomLeftRadius: SizeConfig.width * 4,
-    // borderBottomRightRadius: SizeConfig.width * 4,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -258,7 +269,6 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     marginRight: SizeConfig.width * 3,
-    // padding: 4,
   },
   headerTitle: {
     fontFamily: Fonts.medium,
@@ -272,16 +282,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: SizeConfig.width * 2,
-  },
-  headerAvatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    borderWidth: 2,
-    borderColor: Colors.primary,
-  },
-  headerText: {
-    marginLeft: 12,
   },
   greeting: {
     fontFamily: Fonts.regular,
@@ -349,19 +349,17 @@ const styles = StyleSheet.create({
   listContent: {
     paddingHorizontal: SizeConfig.width * 4,
     paddingBottom: SizeConfig.width * 4,
+    gap: SizeConfig.height * 2,
   },
   separator: {
     height: SizeConfig.width * 2,
   },
   referralCard: {
     backgroundColor: Colors.white,
-    borderRadius: 16,
+    borderRadius: SizeConfig.width * 3,
     padding: SizeConfig.width * 4,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
+    elevation: 1,
+    shadowColor: 'black',
   },
   referralHeader: {
     flexDirection: 'row',
@@ -373,6 +371,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+    gap: SizeConfig.width * 3,
   },
   avatar: {
     width: SizeConfig.width * 30,
@@ -380,22 +379,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   avatarPlaceholder: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: SizeConfig.width * 10,
+    height: SizeConfig.width * 10,
+    borderRadius: (SizeConfig.width * 10) / 2,
     backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarText: {
     fontFamily: Fonts.bold,
-    fontSize: 16,
+    fontSize: SizeConfig.width * 4,
     color: Colors.white,
   },
-  referrerDetails: {
-    marginLeft: 12,
-    flex: 1,
-  },
+
   referrerName: {
     fontFamily: Fonts.semiBold,
     fontSize: SizeConfig.fontSize * 3.5,
@@ -405,7 +401,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     fontSize: SizeConfig.fontSize * 3,
     color: Colors.text_Secondary,
-    marginTop: 2,
   },
   statusBadge: {
     paddingHorizontal: SizeConfig.width * 2,
@@ -431,9 +426,9 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontFamily: Fonts.regular,
-    fontSize: 12,
+    fontSize: SizeConfig.width * 3,
     color: Colors.text_Secondary,
-    marginBottom: 4,
+    marginBottom: SizeConfig.width,
   },
   detailValue: {
     fontFamily: Fonts.medium,

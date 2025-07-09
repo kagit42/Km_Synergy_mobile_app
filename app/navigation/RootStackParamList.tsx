@@ -4,6 +4,6 @@ export type RootStackParamList = {
   ReferralSummary: undefined;
   Profile: undefined;
   BottomTabNavigation: undefined;
-  HowItworks: { data: any; title: string };
+  HowItworks: { data: any; title: string; bannerText?: string };
   AboutUs: undefined;
 };

@@ -93,6 +93,15 @@ export const Profile = ({ navigation }: ProfileType) => {
     },
   ];
 
+  const whyUsBannerText =
+    'Sell your car easily with SynergyKM, buy with confidence, and get support even after the sale.';
+
+  const howItWorksText =
+    '  Refer your friends and family to SynergyKM and earn rewards for every successful referral.';
+
+  const eligibleBannerText =
+    'Eligible teams include Service, Support, Technical, and Bodyshop staff—each playing a key role in keeping SynergyKM running smoothly.';
+
   const ProfileSubScreenTab = ({
     requireURL,
     text,
@@ -118,7 +127,10 @@ export const Profile = ({ navigation }: ProfileType) => {
 
   return (
     <View style={styles.mainComp}>
-      <StatusBar backgroundColor={Colors.Background} barStyle={'dark-content'} />
+      <StatusBar
+        backgroundColor={Colors.Background}
+        barStyle={'dark-content'}
+      />
       <View style={styles.subComp}>
         <Image
           source={{
@@ -149,6 +161,7 @@ export const Profile = ({ navigation }: ProfileType) => {
                 navigation.navigate('HowItworks', {
                   data: howItWorks,
                   title: 'How It Works',
+                  bannerText : howItWorksText
                 });
               }}
               text="How it works"
@@ -160,10 +173,11 @@ export const Profile = ({ navigation }: ProfileType) => {
                 navigation.navigate('HowItworks', {
                   data: eligible,
                   title: 'Eligible Participants',
+                   bannerText : eligibleBannerText
                 });
               }}
               text="Eligible Participants"
-              requireURL={require('../../assets/image/profile/gears.png')}
+              requireURL={require('../../assets/image/profile/leadership.png')}
             />
 
             <ProfileSubScreenTab
@@ -171,6 +185,7 @@ export const Profile = ({ navigation }: ProfileType) => {
                 navigation.navigate('HowItworks', {
                   data: whyUs,
                   title: 'Why Us',
+                   bannerText : whyUsBannerText
                 });
               }}
               text="Why Us"

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -7,22 +7,14 @@ import {
   StatusBar,
   ScrollView,
   FlatList,
-  Dimensions,
-  Alert,
   Pressable,
-  Platform,
 } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SizeConfig } from '../../utils/SizeConfig';
 import { Colors, Fonts } from '../../utils/constant/Theme';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const howItWorks = [
@@ -363,21 +355,8 @@ export const Home = ({ navigation }: Props) => {
                           padding: SizeConfig.width * 3,
                           width: SizeConfig.width * 17,
                           height: SizeConfig.width * 17,
-                          ...Platform.select({
-                            android: {
-                              elevation: 1,
-                              shadowColor: 'black',
-                            },
-                            ios: {
-                              shadowColor: 'black',
-                              shadowOffset: {
-                                width: 0,
-                                height: 1,
-                              },
-                              shadowOpacity: 0.1,
-                              shadowRadius: 4,
-                            },
-                          }),
+                          elevation: 1,
+                          shadowColor: 'black',
                         }}
                       >
                         <Image
@@ -442,42 +421,7 @@ export const Home = ({ navigation }: Props) => {
             />
           </View>
 
-          <View style={{ gap: SizeConfig.width * 2 }}>
-            {/* <Text style={styles.sectionTitle}>Lastest Referals</Text>
-
-            <FlatList
-              data={sampleReferrals}
-              renderItem={({ item }) => {
-                return (
-                  <LinearGradient
-                    colors={
-                      item.status == 'Pending'
-                        ? ['#FFF3CD', '#FFE29F']
-                        : item.status == 'Completed'
-                        ? ['#CFFDBC', '#A1E89B']
-                        : ['#FFD1D1', '#FF9999']
-                    }
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.referralCard}
-                  >
-                    <Pressable
-                      onPress={() => {
-                        navigation.navigate('ReferralSummary');
-                      }}
-                    >
-                      {renderReferralItem({ item })}
-                    </Pressable>
-                  </LinearGradient>
-                );
-              }}
-              keyExtractor={item => item.id}
-              contentContainerStyle={styles.listContent}
-              showsVerticalScrollIndicator={false}
-            /> */}
-
-            {carouselImg()}
-          </View>
+          <View style={{ gap: SizeConfig.width * 2 }}>{carouselImg()}</View>
 
           <View
             style={{
@@ -529,59 +473,11 @@ export const Home = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  topBar: {},
   avatar: {
     width: SizeConfig.width * 30,
     height: SizeConfig.width * 10,
     resizeMode: 'contain',
     // backgroundColor : 'red'
-  },
-  greeting: {
-    fontFamily: Fonts.regular,
-    fontSize: 15,
-    color: Colors.text_Secondary,
-  },
-  userName: {
-    fontFamily: Fonts.semiBold,
-    fontSize: 18,
-    color: Colors.primary,
-  },
-  notifBtn: {
-    backgroundColor: '#f2f6ff',
-    borderRadius: 18,
-    padding: SizeConfig.width * 1.5,
-    elevation: 2,
-  },
-  listContent: {
-    paddingHorizontal: SizeConfig.width * 0.5,
-    gap: SizeConfig.width * 3,
-    paddingVertical: SizeConfig.width * 3,
-  },
-
-  quickActionsWrap: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginHorizontal: 18,
-    marginBottom: 18,
-    // marginTop: 2,
-  },
-  quickActionBtn: {
-    backgroundColor: '#f2f6ff',
-    borderRadius: 14,
-    padding: SizeConfig.width * 4,
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    width: '45%',
-  },
-  quickActionText: {
-    fontFamily: Fonts.medium,
-    color: Colors.primary,
-    fontSize: 13,
-    marginTop: 4,
   },
   sectionTitle: {
     fontFamily: Fonts.medium,
@@ -603,21 +499,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     gap: SizeConfig.width * 4,
-    ...Platform.select({
-      android: {
-        elevation: 1,
-        shadowColor: 'black',
-      },
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-      },
-    }),
+    elevation: 1,
+    shadowColor: 'black',
   },
   carouselImage: {
     width: SizeConfig.width * 12,
@@ -649,85 +532,24 @@ const styles = StyleSheet.create({
   stepperIconWrap: {
     alignItems: 'center',
   },
-  stepperLine: {
-    width: 2,
-    height: 36,
-    backgroundColor: Colors.primary,
-    opacity: 0.18,
-    marginTop: 2,
-  },
+
   stepperTitle: {
     fontFamily: Fonts.semiBold,
-    fontSize: 15,
+    fontSize: SizeConfig.width * 3.5,
     color: Colors.primary,
-    marginBottom: 2,
   },
   stepperDetail: {
     fontFamily: Fonts.regular,
-    fontSize: 13,
-    color: '#555',
-    opacity: 0.9,
-  },
-  fab: {
-    position: 'absolute',
-    right: 24,
-    bottom: 32,
-    backgroundColor: Colors.primary,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
-  },
-  referralCard: {
-    borderRadius: SizeConfig.width * 5,
-    padding: SizeConfig.width * 4,
-  },
-  referralHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: SizeConfig.width * 3,
-  },
-  referrerInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
+    fontSize: SizeConfig.width * 3,
+    color: Colors.text_Secondary,
   },
 
-  avatarPlaceholder: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatarText: {
-    fontFamily: Fonts.bold,
-    fontSize: 16,
-    color: Colors.white,
-  },
-  referrerDetails: {
-    marginLeft: 12,
-    flex: 1,
-  },
   referrerName: {
     fontFamily: Fonts.semiBold,
     fontSize: SizeConfig.fontSize * 3.5,
     color: Colors.text_Primary,
   },
-  referrerLabel: {
-    fontFamily: Fonts.regular,
-    fontSize: SizeConfig.fontSize * 3,
-    color: Colors.black,
-    marginTop: 2,
-  },
+
   statusBadge: {
     paddingHorizontal: SizeConfig.width * 2,
     paddingVertical: SizeConfig.width * 1,
@@ -737,28 +559,5 @@ const styles = StyleSheet.create({
   statusText: {
     fontFamily: Fonts.medium,
     fontSize: SizeConfig.fontSize * 2.3,
-  },
-  referralDetails: {
-    borderTopWidth: 0.5,
-    borderTopColor: Colors.lightBorder,
-    paddingTop: SizeConfig.width * 3,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  detailItem: {
-    flex: 1,
-  },
-  detailLabel: {
-    fontFamily: Fonts.regular,
-    fontSize: 12,
-    color: Colors.black,
-    marginBottom: 4,
-  },
-  detailValue: {
-    fontFamily: Fonts.medium,
-    fontSize: SizeConfig.fontSize * 3,
-    color: Colors.text_Primary,
   },
 });

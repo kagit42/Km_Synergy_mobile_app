@@ -23,7 +23,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'HowItworks'>;
 export const HowItworks = ({ navigation, route }: Props) => {
   let Data = route.params.data;
   let title = route.params.title;
-
+  let bannerText = route.params.bannerText;
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={Colors.primary} barStyle="light-content" />
@@ -50,12 +50,14 @@ export const HowItworks = ({ navigation, route }: Props) => {
                     <Text style={styles.mainHeading}>
                       Share & Earn with SynergyKM
                     </Text>
-                    <Text style={styles.description}>
-                      Refer your friends and family to SynergyKM and earn
-                      rewards for every successful referral.
-                    </Text>
+                    <Text style={styles.description}>{bannerText}</Text>
                   </View>
-                  <Pressable style={styles.referButton}>
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate('ReferFormScreen');
+                    }}
+                    style={styles.referButton}
+                  >
                     <Text style={styles.referButtonText}>Refer</Text>
                   </Pressable>
                 </View>
@@ -76,8 +78,6 @@ export const HowItworks = ({ navigation, route }: Props) => {
                 }}
               >
                 <View style={{ gap: SizeConfig.height * 2 }}>
-                 
-
                   <FlatList
                     data={Data}
                     keyExtractor={(_, index) => index.toString()}
