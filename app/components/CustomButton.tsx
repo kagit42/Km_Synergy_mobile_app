@@ -14,7 +14,7 @@ import { SizeConfig } from '../utils/SizeConfig';
 import { Colors, Fonts } from '../utils/constant/Theme';
 
 interface CustomButtonProps {
-  PressableStyle?: ViewStyle[];
+  PressableStyle?: ViewStyle;
   TextStyle?: TextStyle[];
   TextValue: string;
   OnPress?: () => void;
@@ -22,12 +22,11 @@ interface CustomButtonProps {
   RHSIcon?: ReactNode;
   LHSIconOnPress?: () => void;
   RHSIconOnPress?: () => void;
-  mainstyle?: StyleProp<ViewStyle>;
   isLoading?: boolean;
 }
 
 export default function CustomButton({
-  PressableStyle = [],
+  PressableStyle,
   TextStyle = [],
   TextValue,
   OnPress,
@@ -35,7 +34,6 @@ export default function CustomButton({
   RHSIcon,
   LHSIconOnPress,
   RHSIconOnPress,
-  mainstyle,
   isLoading = false,
 }: CustomButtonProps) {
   return (

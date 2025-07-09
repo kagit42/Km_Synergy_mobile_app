@@ -16,7 +16,6 @@ import { Colors, Fonts } from '../../utils/constant/Theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import LinearGradient from 'react-native-linear-gradient';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'HowItworks'>;
 

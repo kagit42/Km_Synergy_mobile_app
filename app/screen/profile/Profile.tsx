@@ -15,10 +15,25 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { SizeConfig } from '../../utils/SizeConfig';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
+import { LogoutModal } from '../../components/LogoutModal';
 
 type ProfileType = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 
 export const Profile = ({ navigation }: ProfileType) => {
+  const [isLogoutModalVisible, setLogoutModalVisible] = useState(false);
+
+  const handleLogout = async () => {
+    navigation.navigate('Home');
+    setLogoutModalVisible(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      setLogoutModalVisible(false);
+    };
+  }, []);
+
   const howItWorks = [
     {
       img: require('../../assets/image/home/customerDetail.png'),
@@ -111,7 +126,11 @@ export const Profile = ({ navigation }: ProfileType) => {
     text: string;
     onPress?: () => void;
   }) => (
-    <TouchableOpacity onPress={onPress} style={styles.tabComp}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={onPress}
+      style={styles.tabComp}
+    >
       <View style={styles.tabCompRightPart}>
         <Image source={requireURL} style={styles.tabImg} />
         <Text style={styles.tabText}>{text}</Text>
@@ -133,9 +152,7 @@ export const Profile = ({ navigation }: ProfileType) => {
       />
       <View style={styles.subComp}>
         <Image
-          source={{
-            uri: 'https://img.freepik.com/free-photo/close-up-upset-american-black-person_23-2148749582.jpg?semt=ais_hybrid&w=740',
-          }}
+          source={require('../../assets/image/profile/avatar.png')}
           style={styles.avatar}
         />
         <View style={{ gap: SizeConfig.width * 0.5 }}>
@@ -161,7 +178,7 @@ export const Profile = ({ navigation }: ProfileType) => {
                 navigation.navigate('HowItworks', {
                   data: howItWorks,
                   title: 'How It Works',
-                  bannerText : howItWorksText
+                  bannerText: howItWorksText,
                 });
               }}
               text="How it works"
@@ -173,7 +190,7 @@ export const Profile = ({ navigation }: ProfileType) => {
                 navigation.navigate('HowItworks', {
                   data: eligible,
                   title: 'Eligible Participants',
-                   bannerText : eligibleBannerText
+                  bannerText: eligibleBannerText,
                 });
               }}
               text="Eligible Participants"
@@ -185,7 +202,7 @@ export const Profile = ({ navigation }: ProfileType) => {
                 navigation.navigate('HowItworks', {
                   data: whyUs,
                   title: 'Why Us',
-                   bannerText : whyUsBannerText
+                  bannerText: whyUsBannerText,
                 });
               }}
               text="Why Us"
@@ -210,7 +227,7 @@ export const Profile = ({ navigation }: ProfileType) => {
 
             <ProfileSubScreenTab
               onPress={() => {
-                navigation.navigate('AboutUs');
+                setLogoutModalVisible(!isLogoutModalVisible);
               }}
               text="Logout"
               requireURL={require('../../assets/image/profile/logout.png')}
@@ -218,6 +235,15 @@ export const Profile = ({ navigation }: ProfileType) => {
           </View>
         </ScrollView>
       </View>
+
+      {/* Logout Modal */}
+
+      <LogoutModal
+        isLogoutModalVisible={isLogoutModalVisible}
+        setLogoutModalVisible={setLogoutModalVisible}
+        handleLogout={handleLogout}
+        profileuser={'Suhail'}
+      />
     </View>
   );
 };
@@ -304,7 +330,6 @@ const styles = StyleSheet.create({
   avatar: {
     width: SizeConfig.width * 20,
     height: SizeConfig.width * 20,
-    borderRadius: (SizeConfig.width * 20) / 2,
   },
   name: {
     fontFamily: Fonts.semiBold,

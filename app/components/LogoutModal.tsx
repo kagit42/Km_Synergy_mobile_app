@@ -20,7 +20,7 @@ export const LogoutModal = ({
   isLogoutModalVisible: boolean;
   setLogoutModalVisible: Dispatch<React.SetStateAction<boolean>>;
   profileuser: any;
-  handleLogout: () => Promise<void>;
+  handleLogout: () => void;
 }) => {
   return (
     <Modal
@@ -39,12 +39,13 @@ export const LogoutModal = ({
         <View style={styles.ModalMainComp}>
           <View style={styles.ModalSubMainComp}>
             <Image
-              source={require('../assets/image/profile/logout.png')}
+              source={require('../assets/image/profile/logoutModal.png')}
               style={{
                 width: SizeConfig.width * 40,
                 height: SizeConfig.width * 40,
                 alignSelf: 'center',
               }}
+              resizeMode="contain"
             />
             <Text style={styles.ModalText}>
               <Text
@@ -53,9 +54,8 @@ export const LogoutModal = ({
                   fontFamily: Fonts.semiBold,
                 }}
               >
-                {profileuser?.name
-                  ? profileuser.name.charAt(0).toUpperCase() +
-                    profileuser.name.slice(1)
+                {profileuser
+                  ? profileuser.charAt(0).toUpperCase() + profileuser.slice(1)
                   : 'Hello'}
               </Text>{' '}
               are you sure you want to logout?
@@ -67,9 +67,9 @@ export const LogoutModal = ({
                 OnPress={() => {
                   setLogoutModalVisible(false);
                 }}
-                mainstyle={{
+                PressableStyle={{
                   height: SizeConfig.height * 6,
-                  width: '100%',
+                  flex: 1,
                 }}
               />
               <CustomButton
@@ -78,9 +78,9 @@ export const LogoutModal = ({
                 OnPress={() => {
                   handleLogout();
                 }}
-                mainstyle={{
+                PressableStyle={{
                   height: SizeConfig.height * 6,
-                  width: '100%',
+                  flex: 1,
                 }}
               />
             </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   ModalText: {
     color: Colors.black,
     fontSize: SizeConfig.fontSize * 4.3,
-    fontFamily: Fonts.medium,
+    fontFamily: Fonts.regular,
     textAlign: 'center',
     alignSelf: 'center',
   },
