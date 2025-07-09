@@ -223,7 +223,7 @@ export const Profile = ({ navigation }: ProfileType) => {
           <View style={{ gap: SizeConfig.width * 3 }}>
             <ProfileSubScreenTab
               onPress={() => {
-                navigation.navigate('HowItworks', {
+                navigation.navigate('ProfileSubScreens', {
                   data: howItWorks,
                   title: 'How It Works',
                   bannerText: howItWorksText,
@@ -235,7 +235,7 @@ export const Profile = ({ navigation }: ProfileType) => {
 
             <ProfileSubScreenTab
               onPress={() => {
-                navigation.navigate('HowItworks', {
+                navigation.navigate('ProfileSubScreens', {
                   data: eligible,
                   title: 'Eligible Participants',
                   bannerText: eligibleBannerText,
@@ -247,7 +247,7 @@ export const Profile = ({ navigation }: ProfileType) => {
 
             <ProfileSubScreenTab
               onPress={() => {
-                navigation.navigate('HowItworks', {
+                navigation.navigate('ProfileSubScreens', {
                   data: whyUs,
                   title: 'Why Us',
                   bannerText: whyUsBannerText,

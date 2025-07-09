@@ -17,9 +17,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'HowItworks'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'ProfileSubScreens'>;
 
-export const HowItworks = ({ navigation, route }: Props) => {
+export const ProfileSubScreens = ({ navigation, route }: Props) => {
   let Data = route.params.data;
   let title = route.params.title;
   let bannerText = route.params.bannerText;
