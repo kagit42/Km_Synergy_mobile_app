@@ -1,6 +1,7 @@
 import {
   Image,
   ImageBackground,
+  ImageProps,
   Pressable,
   StatusBar,
   StyleSheet,
@@ -8,16 +9,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Colors, Fonts } from '../../utils/constant/Theme';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { SizeConfig } from '../../utils/SizeConfig';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type ProfileType = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 
@@ -96,65 +92,43 @@ export const Profile = ({ navigation }: ProfileType) => {
     },
   ];
 
+  const ProfileSubScreenTab = ({
+    requireURL,
+    text,
+    onPress,
+  }: {
+    requireURL: ImageProps;
+    text: string;
+    onPress?: () => void;
+  }) => (
+    <TouchableOpacity onPress={onPress} style={styles.tabComp}>
+      <View style={styles.tabCompRightPart}>
+        <Image source={requireURL} style={styles.tabImg} />
+        <Text style={styles.tabText}>{text}</Text>
+      </View>
+
+      <MaterialIcons
+        name={'chevron-right'}
+        size={SizeConfig.width * 5.5}
+        color={Colors.primary}
+      />
+    </TouchableOpacity>
+  );
+
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#fafafa',
-        paddingHorizontal: SizeConfig.width * 4,
-        gap: SizeConfig.width * 5,
-        paddingVertical: SizeConfig.width * 4,
-      }}
-    >
+    <View style={styles.mainComp}>
       <StatusBar backgroundColor={'#fafafa'} barStyle={'dark-content'} />
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: SizeConfig.width * 2,
-        }}
-      >
+      <View style={styles.subComp}>
         <Image
           source={{
             uri: 'https://img.freepik.com/free-photo/close-up-upset-american-black-person_23-2148749582.jpg?semt=ais_hybrid&w=740',
           }}
-          style={{
-            width: SizeConfig.width * 20,
-            height: SizeConfig.width * 20,
-            borderRadius: (SizeConfig.width * 20) / 2,
-          }}
+          style={styles.avatar}
         />
         <View style={{ gap: SizeConfig.width * 0.5 }}>
-          <Text
-            style={{
-              fontFamily: Fonts.semiBold,
-              fontSize: SizeConfig.fontSize * 4.9,
-              color: Colors.text_Secondary,
-              textAlign: 'center',
-            }}
-          >
-            John Doe
-          </Text>
-          <Text
-            style={{
-              fontFamily: Fonts.regular,
-              fontSize: SizeConfig.fontSize * 3.5,
-              color: Colors.text_Secondary,
-              textAlign: 'center',
-            }}
-          >
-            +91 1234567890
-          </Text>
-          <Text
-            style={{
-              fontFamily: Fonts.regular,
-              fontSize: SizeConfig.fontSize * 3.5,
-              color: Colors.text_Secondary,
-              textAlign: 'center',
-            }}
-          >
-            abc@gmail.com
-          </Text>
+          <Text style={styles.name}>John Doe</Text>
+          <Text style={styles.mediaContact}>+91 1234567890</Text>
+          <Text style={styles.mediaContact}>abc@gmail.com</Text>
         </View>
       </View>
       <View style={{ gap: SizeConfig.width * 3 }}>
@@ -202,279 +176,63 @@ export const Profile = ({ navigation }: ProfileType) => {
         />
 
         <View style={{ gap: SizeConfig.width * 3 }}>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              paddingVertical: SizeConfig.width * 3,
-              borderRadius: SizeConfig.width * 3,
-              backgroundColor: Colors.border,
-              padding: SizeConfig.width * 3,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+          <ProfileSubScreenTab
             onPress={() => {
               navigation.navigate('HowItworks', {
                 data: howItWorks,
                 title: 'How It Works',
               });
             }}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: SizeConfig.width * 3,
-              }}
-            >
-              <Image
-                source={require('../../assets/image/profile/gears.png')}
-                style={{
-                  width: SizeConfig.width * 10,
-                  height: SizeConfig.width * 10,
-                  resizeMode: 'contain',
-                  // tintColor: Colors.primary,
-                }}
-              />
-              <Text
-                style={{
-                  fontFamily: Fonts.medium,
-                  fontSize: SizeConfig.fontSize * 3.3,
-                }}
-              >
-                How it Works
-              </Text>
-            </View>
-            <MaterialIcons
-              name={'arrow-right'}
-              size={22}
-              color={Colors.primary}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              paddingVertical: SizeConfig.width * 3,
-              borderRadius: SizeConfig.width * 3,
-              backgroundColor: Colors.border,
-              padding: SizeConfig.width * 3,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+            text="How it works"
+            requireURL={require('../../assets/image/profile/gears.png')}
+          />
+
+          <ProfileSubScreenTab
             onPress={() => {
               navigation.navigate('HowItworks', {
                 data: eligible,
                 title: 'Eligible Participants',
               });
             }}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: SizeConfig.width * 3,
-              }}
-            >
-              <Image
-                source={require('../../assets/image/profile/leadership.png')}
-                style={{
-                  width: SizeConfig.width * 10,
-                  height: SizeConfig.width * 10,
-                  resizeMode: 'contain',
-                  // tintColor: Colors.primary,
-                }}
-              />
-              <Text
-                style={{
-                  fontFamily: Fonts.medium,
-                  fontSize: SizeConfig.fontSize * 3.3,
-                }}
-              >
-                Eligible Participants
-              </Text>
-            </View>
-            <MaterialIcons
-              name={'arrow-right'}
-              size={22}
-              color={Colors.primary}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              paddingVertical: SizeConfig.width * 3,
-              borderRadius: SizeConfig.width * 3,
-              backgroundColor: Colors.border,
-              paddingHorizontal: SizeConfig.width * 3,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+            text="Eligible Participants"
+            requireURL={require('../../assets/image/profile/gears.png')}
+          />
+
+          <ProfileSubScreenTab
             onPress={() => {
               navigation.navigate('HowItworks', {
                 data: whyUs,
                 title: 'Why Us',
               });
             }}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: SizeConfig.width * 3,
-              }}
-            >
-              <Image
-                source={require('../../assets/image/profile/deal.png')}
-                style={{
-                  width: SizeConfig.width * 10,
-                  height: SizeConfig.width * 10,
-                  resizeMode: 'contain',
-                  // tintColor: Colors.primary,
-                }}
-              />
-              <Text
-                style={{
-                  fontFamily: Fonts.medium,
-                  fontSize: SizeConfig.fontSize * 3.3,
-                }}
-              >
-                Redefining Pre-Owned Car Deals
-              </Text>
-            </View>
+            text="Why Us"
+            requireURL={require('../../assets/image/profile/deal.png')}
+          />
 
-            <MaterialIcons
-              name={'arrow-right'}
-              size={22}
-              color={Colors.primary}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              paddingVertical: SizeConfig.width * 3,
-              borderRadius: SizeConfig.width * 3,
-              backgroundColor: Colors.border,
-              paddingHorizontal: SizeConfig.width * 3,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+          <ProfileSubScreenTab
             onPress={() => {
               navigation.navigate('ReferralSummary');
             }}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: SizeConfig.width * 3,
-              }}
-            >
-              <Image
-                source={require('../../assets/image/profile/deal.png')}
-                style={{
-                  width: SizeConfig.width * 10,
-                  height: SizeConfig.width * 10,
-                  resizeMode: 'contain',
-                  // tintColor: Colors.primary,
-                }}
-              />
-              <Text
-                style={{
-                  fontFamily: Fonts.medium,
-                  fontSize: SizeConfig.fontSize * 3.3,
-                }}
-              >
-                Referral history
-              </Text>
-            </View>
-
-            <MaterialIcons
-              name={'arrow-right'}
-              size={22}
-              color={Colors.primary}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              paddingVertical: SizeConfig.width * 3,
-              borderRadius: SizeConfig.width * 3,
-              backgroundColor: Colors.border,
-              paddingHorizontal: SizeConfig.width * 3,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-            onPress={() => {
-              navigation.navigate('HowItworks', {
-                data: whyUs,
-                title: 'Why Us',
-              });
-            }}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: SizeConfig.width * 3,
-              }}
-            >
-              <Image
-                source={require('../../assets/image/profile/deal.png')}
-                style={{
-                  width: SizeConfig.width * 10,
-                  height: SizeConfig.width * 10,
-                  resizeMode: 'contain',
-                  // tintColor: Colors.primary,
-                }}
-              />
-              <Text
-                style={{
-                  fontFamily: Fonts.medium,
-                  fontSize: SizeConfig.fontSize * 3.3,
-                }}
-              >
-                About
-              </Text>
-            </View>
-
-            <MaterialIcons
-              name={'arrow-right'}
-              size={22}
-              color={Colors.primary}
-            />
-          </TouchableOpacity>
-        </View>
-
-        {/* <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: SizeConfig.width * 7,
-          }}
-        >
-          <Image
-            source={require('../../assets/image/home/techTeam.png')}
-            style={{
-              width: SizeConfig.width * 10,
-              height: SizeConfig.width * 10,
-              resizeMode: 'contain',
-              tintColor: Colors.border,
-            }}
+            text="Referral History"
+            requireURL={require('../../assets/image/profile/referralSummary.png')}
           />
-          <Text
-            style={{
-              color: Colors.border,
-              fontFamily: Fonts.semiBold,
-              fontSize: SizeConfig.fontSize * 3,
+
+          <ProfileSubScreenTab
+            onPress={() => {
+              navigation.navigate('AboutUs');
             }}
-          >
-            1.0.1
-          </Text>
-        </View> */}
+            text="About Us"
+            requireURL={require('../../assets/image/profile/about.png')}
+          />
+
+          <ProfileSubScreenTab
+            onPress={() => {
+              navigation.navigate('AboutUs');
+            }}
+            text="Logout"
+            requireURL={require('../../assets/image/profile/logout.png')}
+          />
+        </View>
       </View>
     </View>
   );
@@ -520,5 +278,60 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     fontSize: SizeConfig.fontSize * 3.3,
     // marginRight: 4,
+  },
+  tabComp: {
+    width: '100%',
+    paddingVertical: SizeConfig.width * 3,
+    borderRadius: SizeConfig.width * 3,
+    backgroundColor: Colors.Color_F2F2F2,
+    paddingHorizontal: SizeConfig.width * 3,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  tabCompRightPart: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SizeConfig.width * 3,
+  },
+  tabImg: {
+    width: SizeConfig.width * 10,
+    height: SizeConfig.width * 10,
+    resizeMode: 'contain',
+    // tintColor: Colors.primary,
+  },
+  tabText: {
+    fontFamily: Fonts.medium,
+    fontSize: SizeConfig.fontSize * 3,
+    color: Colors.black,
+  },
+  mainComp: {
+    flex: 1,
+    backgroundColor: '#fafafa',
+    paddingHorizontal: SizeConfig.width * 4,
+    gap: SizeConfig.width * 5,
+    paddingVertical: SizeConfig.width * 4,
+  },
+  subComp: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SizeConfig.width * 2,
+  },
+  avatar: {
+    width: SizeConfig.width * 20,
+    height: SizeConfig.width * 20,
+    borderRadius: (SizeConfig.width * 20) / 2,
+  },
+  name: {
+    fontFamily: Fonts.semiBold,
+    fontSize: SizeConfig.fontSize * 4.9,
+    color: Colors.text_Secondary,
+    textAlign: 'center',
+  },
+  mediaContact: {
+    fontFamily: Fonts.regular,
+    fontSize: SizeConfig.fontSize * 3.5,
+    color: Colors.text_Secondary,
+    textAlign: 'center',
   },
 });

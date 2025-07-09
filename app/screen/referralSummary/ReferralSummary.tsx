@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import { Colors, Fonts } from '../../utils/constant/Theme';
 import { SizeConfig } from '../../utils/SizeConfig';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/RootStackParamList';
 
 // Types for our referral data
 interface Referral {
@@ -64,8 +67,12 @@ const sampleReferrals: Referral[] = [
 ];
 
 type FilterType = 'All' | 'Pending' | 'Completed' | 'Failed';
+type ReferralTypeProp = NativeStackScreenProps<
+  RootStackParamList,
+  'ReferralSummary'
+>;
 
-export const ReferralSummary = () => {
+export const ReferralSummary = ({ navigation }: ReferralTypeProp) => {
   const [selectedFilter, setSelectedFilter] = useState<FilterType>('All');
 
   const filteredReferrals = useMemo(() => {
@@ -184,31 +191,22 @@ export const ReferralSummary = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingVertical: SizeConfig.width * 5,
-          borderBottomRightRadius: SizeConfig.width * 5,
-          borderBottomLeftRadius: SizeConfig.width * 5,
-          backgroundColor: 'white',
-          paddingHorizontal: SizeConfig.width * 4,
-          elevation: 5,
-        }}
-      >
-        <Image
-          source={require('../../assets/image/home/kalyani_light.png')}
-          style={styles.avatar}
-        />
-        <Image
-          source={require('../../assets/image/home/Maruti_Suzuki.png')}
-          style={styles.avatar}
-        />
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backBtn}
+        >
+          <Ionicons
+            name="arrow-back"
+            size={SizeConfig.width * 5}
+            color={Colors.black}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Filter by Status</Text>
       </View>
 
       {/* Filter Section */}
       <View style={styles.filterContainer}>
-        <Text style={styles.filterTitle}>Filter by Status</Text>
         <View style={styles.filterButtons}>
           {renderFilterButton('All')}
           {renderFilterButton('Pending')}
@@ -245,16 +243,30 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Background,
   },
   header: {
-    backgroundColor: Colors.white,
-    // paddingHorizontal: SizeConfig.width * 4,
-    // paddingVertical: SizeConfig.width * 3,
-    // borderBottomLeftRadius: 18,
-    // borderBottomRightRadius: 18,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: SizeConfig.width * 4,
+    paddingVertical: SizeConfig.height * 2.5,
+    backgroundColor: '#fff',
+    // borderBottomLeftRadius: SizeConfig.width * 4,
+    // borderBottomRightRadius: SizeConfig.width * 4,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 6,
+  },
+  backBtn: {
+    marginRight: SizeConfig.width * 3,
+    // padding: 4,
+  },
+  headerTitle: {
+    fontFamily: Fonts.medium,
+    fontSize: SizeConfig.width * 4,
+    color: Colors.black,
+    flex: 1,
+    textAlign: 'center',
+    marginRight: SizeConfig.width * 6,
   },
   headerContent: {
     flexDirection: 'row',

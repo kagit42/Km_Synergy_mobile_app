@@ -5,4 +5,5 @@ export type RootStackParamList = {
   Profile: undefined;
   BottomTabNavigation: undefined;
   HowItworks: { data: any; title: string };
+  AboutUs: undefined;
 };

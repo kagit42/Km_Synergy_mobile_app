@@ -19,4 +19,5 @@ export const Colors = {
   lightBorder: '#CBD5E1',
   d8d5db: '#D8D5DB',
   Color_2d3142: '#2D3142',
+  Color_F2F2F2 : '#F2F2F2'
 };

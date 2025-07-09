@@ -7,6 +7,7 @@ import { ReferralSummary } from '../screen/referralSummary/ReferralSummary';
 import { Profile } from '../screen/profile/Profile';
 import BottomTabNavigation from './BottomTabNavigation';
 import { HowItworks } from '../screen/profile/HowItWorks';
+import AboutUs from '../screen/profile/AboutUs';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,6 +25,7 @@ export const StackNavigation = () => {
         <Stack.Screen name="ReferralSummary" component={ReferralSummary} />
         <Stack.Screen name="HowItworks" component={HowItworks} />
         <Stack.Screen name="ReferFormScreen" component={ReferFormScreen} />
+        <Stack.Screen name="AboutUs" component={AboutUs} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

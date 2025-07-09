@@ -254,11 +254,11 @@ export const Home = ({ navigation }: Props) => {
           }}
         >
           <Image
-            source={require('../../assets/image/home/kalyani_light.png')}
+            source={require('../../assets/image/global/kalyani_light.png')}
             style={styles.avatar}
           />
           <Image
-            source={require('../../assets/image/home/Maruti_Suzuki.png')}
+            source={require('../../assets/image/global/Maruti_Suzuki.png')}
             style={styles.avatar}
           />
         </View>
@@ -341,7 +341,7 @@ export const Home = ({ navigation }: Props) => {
                       color: 'white',
                     }}
                   >
-                    Refeer
+                    Refer
                   </Text>
                 </Pressable>
               </View>
