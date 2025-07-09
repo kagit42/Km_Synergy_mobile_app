@@ -25,8 +25,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-
-
 const howItWorks = [
   {
     img: require('../../assets/image/home/customerDetail.png'),
@@ -173,6 +171,11 @@ const carouselImg = () => (
       height={SizeConfig.height * 15}
       data={CAROUSEL_DATA}
       scrollAnimationDuration={1000}
+      mode="parallax"
+      modeConfig={{
+        parallaxScrollingScale: 0.9,
+        parallaxScrollingOffset: 50,
+      }}
       renderItem={({ item }) => (
         <Image
           source={item}
@@ -188,42 +191,6 @@ const carouselImg = () => (
   </View>
 );
 
-const renderReferralItem = ({ item }: { item: Referral }) => {
-  // const navigation = useNavigation<ReferralSummaryType>();
-  return (
-    <View>
-      <View style={styles.referralHeader}>
-        <View style={styles.referrerInfo}>
-          <View style={styles.avatarPlaceholder}>
-            <Text style={styles.avatarText}>
-              {item.referrerName.charAt(0).toUpperCase()}
-            </Text>
-          </View>
-
-          <View style={styles.referrerDetails}>
-            <Text style={styles.referrerName}>{item.referrerName}</Text>
-            <Text style={styles.referrerLabel}>Referrer</Text>
-          </View>
-        </View>
-        {renderStatusBadge(item.status)}
-      </View>
-
-      <View style={styles.referralDetails}>
-        <View style={styles.detailRow}>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Referred Customer</Text>
-            <Text style={styles.detailValue}>{item.referredCustomer}</Text>
-          </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Date</Text>
-            <Text style={styles.detailValue}>{item.date}</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
-
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export const Home = ({ navigation }: Props) => {
@@ -231,7 +198,7 @@ export const Home = ({ navigation }: Props) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fafafa',
+        backgroundColor: Colors.Background,
         // marginBottom: SizeConfig.height * 15,
       }}
     >

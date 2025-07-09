@@ -420,7 +420,7 @@ export const ReferFormScreen = ({ navigation }: any) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fafafa' }}>
+    <View style={{ flex: 1, backgroundColor: Colors.Background }}>
       <StatusBar backgroundColor={Colors.white} barStyle={'dark-content'} />
       <SafeAreaView style={{ flex: 1 }}>
         {/* <KeyboardAvoidingView style={{ flex: 1 }}> */}

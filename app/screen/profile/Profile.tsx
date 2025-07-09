@@ -3,6 +3,7 @@ import {
   ImageBackground,
   ImageProps,
   Pressable,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -117,7 +118,7 @@ export const Profile = ({ navigation }: ProfileType) => {
 
   return (
     <View style={styles.mainComp}>
-      <StatusBar backgroundColor={'#fafafa'} barStyle={'dark-content'} />
+      <StatusBar backgroundColor={Colors.Background} barStyle={'dark-content'} />
       <View style={styles.subComp}>
         <Image
           source={{
@@ -126,113 +127,81 @@ export const Profile = ({ navigation }: ProfileType) => {
           style={styles.avatar}
         />
         <View style={{ gap: SizeConfig.width * 0.5 }}>
-          <Text style={styles.name}>John Doe</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
+            Xyz Name
+          </Text>
           <Text style={styles.mediaContact}>+91 1234567890</Text>
           <Text style={styles.mediaContact}>abc@gmail.com</Text>
         </View>
       </View>
-      <View style={{ gap: SizeConfig.width * 3 }}>
-        {/* <ImageBackground
-          source={require('../../assets/image/profile/rewardsBanner.png')}
-          style={styles.summaryCard}
-          resizeMode="stretch"
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: SizeConfig.width * 3,
-              paddingHorizontal: SizeConfig.width * 3,
-            }}
-          >
-            <View style={{ flex: 1, gap: SizeConfig.width * 3 }}>
-              <Text style={styles.summaryTitle}>Your Referral Summary</Text>
-              <View style={{ flexDirection: 'row', gap: SizeConfig.width }}>
-                <View style={styles.summaryStatBox}>
-                  <Text style={styles.summaryStatValue}>12</Text>
-                  <Text style={styles.summaryStatLabel}>Referrals</Text>
-                </View>
-                <View style={styles.summaryStatBox}>
-                  <Text style={styles.summaryStatValue}>₹ 2,500</Text>
-                  <Text style={styles.summaryStatLabel}>Rewards</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              // navigation.navigate('ReferralSummary');
-            }}
-            style={styles.summaryActionBtn}
-          >
-            <Text style={styles.summaryActionText}>View Details</Text>
-            <Ionicons name="chevron-forward" size={18} color="#fff" />
-          </TouchableOpacity>
-        </ImageBackground> */}
-
+      <View style={{ gap: SizeConfig.width * 3, flex: 1 }}>
         <View
           style={{ borderBottomWidth: 0.3, borderBottomColor: Colors.border }}
         />
 
-        <View style={{ gap: SizeConfig.width * 3 }}>
-          <ProfileSubScreenTab
-            onPress={() => {
-              navigation.navigate('HowItworks', {
-                data: howItWorks,
-                title: 'How It Works',
-              });
-            }}
-            text="How it works"
-            requireURL={require('../../assets/image/profile/gears.png')}
-          />
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{ paddingBottom: SizeConfig.height * 15 }}
+        >
+          <View style={{ gap: SizeConfig.width * 3 }}>
+            <ProfileSubScreenTab
+              onPress={() => {
+                navigation.navigate('HowItworks', {
+                  data: howItWorks,
+                  title: 'How It Works',
+                });
+              }}
+              text="How it works"
+              requireURL={require('../../assets/image/profile/gears.png')}
+            />
 
-          <ProfileSubScreenTab
-            onPress={() => {
-              navigation.navigate('HowItworks', {
-                data: eligible,
-                title: 'Eligible Participants',
-              });
-            }}
-            text="Eligible Participants"
-            requireURL={require('../../assets/image/profile/gears.png')}
-          />
+            <ProfileSubScreenTab
+              onPress={() => {
+                navigation.navigate('HowItworks', {
+                  data: eligible,
+                  title: 'Eligible Participants',
+                });
+              }}
+              text="Eligible Participants"
+              requireURL={require('../../assets/image/profile/gears.png')}
+            />
 
-          <ProfileSubScreenTab
-            onPress={() => {
-              navigation.navigate('HowItworks', {
-                data: whyUs,
-                title: 'Why Us',
-              });
-            }}
-            text="Why Us"
-            requireURL={require('../../assets/image/profile/deal.png')}
-          />
+            <ProfileSubScreenTab
+              onPress={() => {
+                navigation.navigate('HowItworks', {
+                  data: whyUs,
+                  title: 'Why Us',
+                });
+              }}
+              text="Why Us"
+              requireURL={require('../../assets/image/profile/deal.png')}
+            />
 
-          <ProfileSubScreenTab
-            onPress={() => {
-              navigation.navigate('ReferralSummary');
-            }}
-            text="Referral History"
-            requireURL={require('../../assets/image/profile/referralSummary.png')}
-          />
+            <ProfileSubScreenTab
+              onPress={() => {
+                navigation.navigate('ReferralSummary');
+              }}
+              text="Referral History"
+              requireURL={require('../../assets/image/profile/referralSummary.png')}
+            />
 
-          <ProfileSubScreenTab
-            onPress={() => {
-              navigation.navigate('AboutUs');
-            }}
-            text="About Us"
-            requireURL={require('../../assets/image/profile/about.png')}
-          />
+            <ProfileSubScreenTab
+              onPress={() => {
+                navigation.navigate('AboutUs');
+              }}
+              text="About Us"
+              requireURL={require('../../assets/image/profile/about.png')}
+            />
 
-          <ProfileSubScreenTab
-            onPress={() => {
-              navigation.navigate('AboutUs');
-            }}
-            text="Logout"
-            requireURL={require('../../assets/image/profile/logout.png')}
-          />
-        </View>
+            <ProfileSubScreenTab
+              onPress={() => {
+                navigation.navigate('AboutUs');
+              }}
+              text="Logout"
+              requireURL={require('../../assets/image/profile/logout.png')}
+            />
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -307,7 +276,7 @@ const styles = StyleSheet.create({
   },
   mainComp: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: Colors.Background,
     paddingHorizontal: SizeConfig.width * 4,
     gap: SizeConfig.width * 5,
     paddingVertical: SizeConfig.width * 4,
@@ -324,14 +293,16 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: Fonts.semiBold,
-    fontSize: SizeConfig.fontSize * 4.9,
+    fontSize: SizeConfig.fontSize * 4.3,
     color: Colors.text_Secondary,
     textAlign: 'center',
+    width: SizeConfig.width * 50,
   },
   mediaContact: {
     fontFamily: Fonts.regular,
-    fontSize: SizeConfig.fontSize * 3.5,
+    fontSize: SizeConfig.fontSize * 3,
     color: Colors.text_Secondary,
     textAlign: 'center',
+    width: SizeConfig.width * 50,
   },
 });
