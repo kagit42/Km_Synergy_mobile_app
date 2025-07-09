@@ -16,6 +16,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomButton from '../../components/CustomButton';
 
 const howItWorks = [
   {
@@ -221,6 +222,8 @@ export const Home = ({ navigation }: Props) => {
             style={styles.avatar}
           />
         </View>
+
+        
 
         {/* </View> */}
         <ScrollView
