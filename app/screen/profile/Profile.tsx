@@ -266,7 +266,7 @@ export const Profile = ({ navigation }: ProfileType) => {
 
               <ProfileSubScreenTab
                 onPress={() => {
-                  navigation.navigate('ProfileSubScreens', {
+                  navigation.navigate('WhyUs', {
                     data: whyUs,
                     title: 'Why Us',
                     bannerText: whyUsBannerText,

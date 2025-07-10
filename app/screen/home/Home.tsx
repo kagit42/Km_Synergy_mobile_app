@@ -112,8 +112,8 @@ const carouselImg = () => (
       scrollAnimationDuration={1000}
       mode="parallax"
       modeConfig={{
-        parallaxScrollingScale: 0.9,
-        parallaxScrollingOffset: 50,
+        parallaxScrollingScale: SizeConfig.width / 10 * 2.2,
+        parallaxScrollingOffset: SizeConfig.width * 11,
       }}
       renderItem={({ item }) => (
         <Image

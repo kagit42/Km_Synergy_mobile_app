@@ -6,4 +6,5 @@ export type RootStackParamList = {
   BottomTabNavigation: undefined;
   ProfileSubScreens: { data: any; title: string; bannerText?: string };
   AboutUs: undefined;
+  WhyUs: { data: any; title: string; bannerText?: string };
 };

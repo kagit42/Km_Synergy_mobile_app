@@ -17,9 +17,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { RootStackParamList } from '../../navigation/RootStackParamList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'ProfileSubScreens'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'WhyUs'>;
 
-export const ProfileSubScreens = ({ navigation, route }: Props) => {
+export const WhyUs = ({ navigation, route }: Props) => {
   let Data = route.params.data;
   let title = route.params.title;
   let bannerText = route.params.bannerText;
@@ -27,7 +27,7 @@ export const ProfileSubScreens = ({ navigation, route }: Props) => {
     <View style={styles.container}>
       <StatusBar backgroundColor={Colors.primary} barStyle="light-content" />
       <SafeAreaView style={styles.container}>
-        <View style={{ flex: 1, backgroundColor: Colors.white }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
@@ -112,7 +112,7 @@ export const ProfileSubScreens = ({ navigation, route }: Props) => {
                             source={require('../../assets/image/profile/curvDashUp.png')}
                             style={{
                               width: '100%',
-                              height: SizeConfig.height * 6,
+                              height: SizeConfig.height * 7,
                             }}
                           />
                         )}
@@ -122,7 +122,8 @@ export const ProfileSubScreens = ({ navigation, route }: Props) => {
                             source={require('../../assets/image/profile/curvDashDown.png')}
                             style={{
                               width: '100%',
-                              height: SizeConfig.height * 6,
+                              height: SizeConfig.height * 7,
+                              // backgroundColor : 'red'
                             }}
                           />
                         )}
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   carouselContent: {
-    height : SizeConfig.height * 69,
+    height : SizeConfig.height * 68,
     justifyContent : 'center'
   },
   carouselCard: {
@@ -236,11 +237,11 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     gap: SizeConfig.width * 4,
-    alignItems : 'center'
+    alignItems : 'center',
   },
   carouselImage: {
-    width: SizeConfig.width * 20,
-    height: SizeConfig.width * 20,
+    width: SizeConfig.width * 30,
+    height: SizeConfig.width * 30,
     resizeMode: 'contain',
   },
   carouselTitle: {
@@ -252,7 +253,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     fontSize: SizeConfig.fontSize * 3.2,
     color: '#555',
-    width: SizeConfig.width * 65,
-    // backgroundColor : 'red'
+    width: SizeConfig.width * 55,
   },
 });
