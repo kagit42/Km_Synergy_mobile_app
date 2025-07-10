@@ -113,10 +113,10 @@ export const Profile = ({ navigation }: ProfileType) => {
     'Sell your car easily with SynergyKM, buy with confidence, and get support even after the sale.';
 
   const howItWorksText =
-    '  Refer your friends and family to SynergyKM and earn rewards for every successful referral.';
+    ' Refer your friends and family to SynergyKM and earn rewards for every successful referral.';
 
   const eligibleBannerText =
-    'Eligible teams include Service, Support, Technical, and Bodyshop staff—each playing a key role in keeping SynergyKM running smoothly.';
+    'Key teams like Service, Support, Technical, and Bodyshop keep SynergyKM running.';
 
   const ProfileSubScreenTab = ({
     requireURL,
@@ -147,141 +147,161 @@ export const Profile = ({ navigation }: ProfileType) => {
 
   return (
     <View style={styles.mainComp}>
-      <StatusBar backgroundColor={Colors.Background} barStyle={'dark-content'} />
+      <StatusBar
+        backgroundColor={Colors.white}
+        barStyle={'dark-content'}
+      />
 
       <SafeAreaView
         style={{
           flex: 1,
-          gap: SizeConfig.height * 3,
-          paddingHorizontal: SizeConfig.width * 4,
-          paddingVertical : SizeConfig.height * 3
+          gap : SizeConfig.height * 1.5
         }}
       >
-        {/* <View
-          style={{
-            paddingVertical: SizeConfig.height,
-            paddingBottom : SizeConfig.height * 3
-          }}
-        >
-          <Text
+        <View>
+          <View
             style={{
-              fontFamily: Fonts.medium,
-              fontSize: SizeConfig.fontSize * 4.5,
-              color: Colors.black,
+              paddingVertical: SizeConfig.height * 2,
+              backgroundColor : Colors.white
             }}
           >
-            Profile
-          </Text>
-        </View> */}
-
-        <View style={styles.subComp}>
-          <Image
-            source={require('../../assets/image/profile/avatar.png')}
-            style={styles.avatar}
-          />
-          <View style={{ gap: SizeConfig.width * 0.5 }}>
-            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
-              James Martin JM
+            <Text
+              style={{
+                fontFamily: Fonts.medium,
+                fontSize: SizeConfig.fontSize * 4.5,
+                color: Colors.black,
+                textAlign: 'center',
+              }}
+            >
+              Profile
             </Text>
-            <Text style={styles.mediaContact}>1234567890</Text>
           </View>
-
           <View
             style={{
-              width: SizeConfig.width * 50,
-              height: SizeConfig.width * 50,
-              borderRadius: (SizeConfig.width * 60) / 2,
-              position: 'absolute',
-              backgroundColor: 'rgba(179, 218, 239, 0.32)',
-              right: -SizeConfig.width * 20,
-              top: -SizeConfig.height * 10,
-              zIndex: -1,
-            }}
-          />
-          <View
-            style={{
-              width: SizeConfig.width * 80,
-              height: SizeConfig.width * 80,
-              borderRadius: (SizeConfig.width * 90) / 2,
-              position: 'absolute',
-              backgroundColor: 'rgba(179, 218, 239, 0.26)',
-              right: -SizeConfig.width * 40,
-              top: -SizeConfig.height * 19,
-              zIndex: -2,
+              borderBottomColor: 'black',
+              borderBottomWidth: 0.3,
+              opacity: 0.2,
             }}
           />
         </View>
 
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{
-            paddingBottom: SizeConfig.height * 15,
+        <View
+          style={{
+            flex: 1,
+            gap: SizeConfig.height * 3,
+            paddingHorizontal: SizeConfig.width * 4,
+            paddingVertical: SizeConfig.height,
           }}
         >
-          <View></View>
-
-          <View style={{ gap: SizeConfig.width * 3 }}>
-            <ProfileSubScreenTab
-              onPress={() => {
-                navigation.navigate('ProfileSubScreens', {
-                  data: howItWorks,
-                  title: 'How It Works',
-                  bannerText: howItWorksText,
-                });
-              }}
-              text="How it works"
-              requireURL={require('../../assets/image/profile/gears.png')}
+          <View style={styles.subComp}>
+            <Image
+              source={require('../../assets/image/profile/avatar.png')}
+              style={styles.avatar}
             />
+            <View style={{ gap: SizeConfig.width * 0.5 }}>
+              <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
+                James Martin JM
+              </Text>
+              <Text style={styles.mediaContact}>1234567890</Text>
+            </View>
 
-            <ProfileSubScreenTab
-              onPress={() => {
-                navigation.navigate('ProfileSubScreens', {
-                  data: eligible,
-                  title: 'Eligible Participants',
-                  bannerText: eligibleBannerText,
-                });
+            <View
+              style={{
+                width: SizeConfig.width * 50,
+                height: SizeConfig.width * 50,
+                borderRadius: (SizeConfig.width * 60) / 2,
+                position: 'absolute',
+                backgroundColor: 'rgba(179, 218, 239, 0.32)',
+                right: -SizeConfig.width * 20,
+                top: -SizeConfig.height * 10,
+                zIndex: -1,
               }}
-              text="Eligible Participants"
-              requireURL={require('../../assets/image/profile/leadership.png')}
             />
-
-            <ProfileSubScreenTab
-              onPress={() => {
-                navigation.navigate('ProfileSubScreens', {
-                  data: whyUs,
-                  title: 'Why Us',
-                  bannerText: whyUsBannerText,
-                });
+            <View
+              style={{
+                width: SizeConfig.width * 80,
+                height: SizeConfig.width * 80,
+                borderRadius: (SizeConfig.width * 90) / 2,
+                position: 'absolute',
+                backgroundColor: 'rgba(179, 218, 239, 0.26)',
+                right: -SizeConfig.width * 40,
+                top: -SizeConfig.height * 19,
+                zIndex: -2,
               }}
-              text="Why Us"
-              requireURL={require('../../assets/image/profile/deal.png')}
-            />
-
-            <ProfileSubScreenTab
-              onPress={() => {
-                navigation.navigate('ReferralSummary');
-              }}
-              text="Referral History"
-              requireURL={require('../../assets/image/profile/referralSummary.png')}
-            />
-
-            <ProfileSubScreenTab
-              onPress={() => {
-                navigation.navigate('AboutUs');
-              }}
-              text="About Us"
-              requireURL={require('../../assets/image/profile/about.png')}
-            />
-
-            <ProfileSubScreenTab
-              onPress={() => {
-                setLogoutModalVisible(!isLogoutModalVisible);
-              }}
-              text="Logout"
-              requireURL={require('../../assets/image/profile/logout.png')}
             />
           </View>
-        </ScrollView>
+
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{
+              paddingBottom: SizeConfig.height * 15,
+            }}
+          >
+            <View></View>
+
+            <View style={{ gap: SizeConfig.width * 3 }}>
+              <ProfileSubScreenTab
+                onPress={() => {
+                  navigation.navigate('ProfileSubScreens', {
+                    data: howItWorks,
+                    title: 'How It Works',
+                    bannerText: howItWorksText,
+                  });
+                }}
+                text="How it works"
+                requireURL={require('../../assets/image/profile/gears.png')}
+              />
+
+              <ProfileSubScreenTab
+                onPress={() => {
+                  navigation.navigate('ProfileSubScreens', {
+                    data: eligible,
+                    title: 'Eligible Participants',
+                    bannerText: eligibleBannerText,
+                  });
+                }}
+                text="Eligible Participants"
+                requireURL={require('../../assets/image/profile/leadership.png')}
+              />
+
+              <ProfileSubScreenTab
+                onPress={() => {
+                  navigation.navigate('ProfileSubScreens', {
+                    data: whyUs,
+                    title: 'Why Us',
+                    bannerText: whyUsBannerText,
+                  });
+                }}
+                text="Why Us"
+                requireURL={require('../../assets/image/profile/deal.png')}
+              />
+
+              <ProfileSubScreenTab
+                onPress={() => {
+                  navigation.navigate('ReferralSummary');
+                }}
+                text="Referral History"
+                requireURL={require('../../assets/image/profile/referralSummary.png')}
+              />
+
+              <ProfileSubScreenTab
+                onPress={() => {
+                  navigation.navigate('AboutUs');
+                }}
+                text="About Us"
+                requireURL={require('../../assets/image/profile/about.png')}
+              />
+
+              <ProfileSubScreenTab
+                onPress={() => {
+                  setLogoutModalVisible(!isLogoutModalVisible);
+                }}
+                text="Logout"
+                requireURL={require('../../assets/image/profile/logout.png')}
+              />
+            </View>
+          </ScrollView>
+        </View>
       </SafeAreaView>
 
       {/* Logout Modal */}
@@ -394,5 +414,31 @@ const styles = StyleSheet.create({
     color: Colors.white,
     textAlign: 'left',
     width: SizeConfig.width * 50,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: SizeConfig.width * 4,
+    paddingVertical: SizeConfig.height * 2.5,
+    backgroundColor: '#fff',
+    // borderBottomLeftRadius: SizeConfig.width * 4,
+    // borderBottomRightRadius: SizeConfig.width * 4,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+  },
+  backBtn: {
+    marginRight: SizeConfig.width * 3,
+    // padding: 4,
+  },
+  headerTitle: {
+    fontFamily: Fonts.medium,
+    fontSize: SizeConfig.width * 4,
+    color: Colors.black,
+    flex: 1,
+    textAlign: 'center',
+    marginRight: SizeConfig.width * 6,
   },
 });

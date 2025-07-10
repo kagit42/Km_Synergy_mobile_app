@@ -27,7 +27,7 @@ export const ProfileSubScreens = ({ navigation, route }: Props) => {
     <View style={styles.container}>
       <StatusBar backgroundColor={Colors.primary} barStyle="light-content" />
       <SafeAreaView style={styles.container}>
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={{ flex: 1, backgroundColor: Colors.white }}>
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
@@ -112,7 +112,7 @@ export const ProfileSubScreens = ({ navigation, route }: Props) => {
                             source={require('../../assets/image/profile/curvDashUp.png')}
                             style={{
                               width: '100%',
-                              height: SizeConfig.height * 7,
+                              height: SizeConfig.height * 6,
                               // backgroundColor : 'red'
                             }}
                           />
@@ -123,7 +123,7 @@ export const ProfileSubScreens = ({ navigation, route }: Props) => {
                             source={require('../../assets/image/profile/curvDashDown.png')}
                             style={{
                               width: '100%',
-                              height: SizeConfig.height * 7,
+                              height: SizeConfig.height * 6,
                               // backgroundColor : 'red'
                             }}
                           />
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: SizeConfig.width * 4,
-    paddingVertical: SizeConfig.height * 3,
+    paddingBottom: SizeConfig.height * 2,
   },
   contentTextContainer: {
     width: SizeConfig.width * 50,

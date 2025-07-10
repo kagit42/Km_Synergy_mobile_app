@@ -196,9 +196,7 @@ export const ReferFormScreen = ({ navigation }: any) => {
               InputOnTextChange={text => {
                 const cleanedText = text
                   .replace(/[^a-zA-Z0-9]/g, '')
-                  .trim()
                   .replace(emojiRegex, '')
-                  .toUpperCase();
                 setVehicleNumber(cleanedText);
               }}
               InputText={vehicleNumber}

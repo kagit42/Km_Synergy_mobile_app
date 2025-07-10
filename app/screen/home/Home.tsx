@@ -64,34 +64,7 @@ const whyUs = [
   },
 ];
 
-const getStatusColors = (status: string) => {
-  switch (status) {
-    case 'Pending':
-      return {
-        backgroundColor: '#FEF3C7',
-        textColor: '#D97706',
-        borderColor: '#F59E0B',
-      };
-    case 'Completed':
-      return {
-        backgroundColor: '#D1FAE5',
-        textColor: '#059669',
-        borderColor: '#10B981',
-      };
-    case 'Failed':
-      return {
-        backgroundColor: '#FEE2E2',
-        textColor: '#DC2626',
-        borderColor: '#EF4444',
-      };
-    default:
-      return {
-        backgroundColor: '#F3F4F6',
-        textColor: '#6B7280',
-        borderColor: '#D1D5DB',
-      };
-  }
-};
+
 
 const eligible = [
   {
@@ -112,34 +85,7 @@ const eligible = [
   },
 ];
 
-// Render status badge
-const renderStatusBadge = (status: string) => {
-  const colors = getStatusColors(status);
-  return (
-    <View
-      style={[
-        styles.statusBadge,
-        {
-          backgroundColor: colors.backgroundColor,
-          borderColor: colors.borderColor,
-        },
-      ]}
-    >
-      <Text style={[styles.statusText, { color: colors.textColor }]}>
-        {status}
-      </Text>
-    </View>
-  );
-};
 
-interface Referral {
-  id: string;
-  referrerName: string;
-  referrerAvatar?: string;
-  status: 'Pending' | 'Completed' | 'Failed';
-  referredCustomer: string;
-  date: string;
-}
 
 const CAROUSEL_DATA = [
   require('../../assets/image/home/carousel1.png'),
@@ -195,7 +141,7 @@ export const Home = ({ navigation }: Props) => {
         // marginBottom: SizeConfig.height * 15,
       }}
     >
-      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+      <StatusBar backgroundColor={Colors.white} barStyle={'dark-content'} />
       <SafeAreaView
         style={{
           flex: 1,
